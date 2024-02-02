@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        REGISTRY: ${REGISTRY:-registry.gitlab.com/imgoptify/resmush-unleashed}
+    volumes:
+      - ./:/var/www/html
+      # - ./output:/var/www/html/output
+    environment:
+      - RESMUSH_OUTPUT_FORMAT=json
+      - RESMUSH_OUTPUT_DIR=output/
+      - RESMUSH_LOADAVG_ALERT_THRESHOLD=20
+      - RESMUSH_REMOTE_SERVER=http://localhost/
+      - RESMUSH_REMOTE_SERVER_ID=localhost
+      - RESMUSH_REMOTE_SERVER_FULL_URL=http://localhost/
+      - RESMUSH_REMOTE_KEY_FULL_RESPONSE=D3732B6610CD7EB530D6B2BDBB13F05E
+      # - RESMUSH_TOKEN=md5(time() . rand())
+      - RESMUSH_APPNAME=unleashed reSmush
+      - RESMUSH_APPVER=3.0.4.20210124
+      # - RESMUSH_OPTIPNG_PATH=/usr/bin/optipng -o 3
+      # - RESMUSH_PNGQUANT_PATH=/usr/bin/pngquant --force
+      # - RESMUSH_JPEGOPTIM_PATH=/usr/bin/jpegoptim --max=
+      # - RESMUSH_WEBP_PATH=/usr/bin/cwebp -m 6 -mt -q
+      # - RESMUSH_AVIF_PATH=/usr/bin/avif -s 8
+      - RESMUSH_JPEGOPTIM_LEVEL=92
+      - RESMUSH_WEBPMINORFACTOR_LEVEL=0.85
+      # - RESMUSH_EXPIRES=time() + 300
+      # - RESMUSH_EXPIRED_LIMIT=time() - 300
+      # - RESMUSH_MAX_FILESIZE=5242880 * 5
+      - RESMUSH_DISK_USAGE_THRESHOLD=95
+    ports:
+    - "80:80"

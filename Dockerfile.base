@@ -1,0 +1,33 @@
+ARG PHP_VER="7.4"
+FROM php:$PHP_VER-apache
+
+ARG GD_PARAMS="--with-freetype=/usr --with-jpeg=/usr"
+ARG PHP_MOD_INSTALL="intl json curl soap exif zip sockets opcache gd"
+
+RUN apt update && apt install -y \
+        less \
+        openssh-client \
+        libmagick++-6.q16-dev \
+        libfreetype-dev \
+        libjpeg62-turbo-dev \
+        libpng-dev \
+        libicu-dev \
+        librust-curl-dev \
+        libxml2-dev \
+        libzip-dev \
+        libgomp1 \
+        optipng \
+        pngquant \
+        jpegoptim \
+        webp \
+        libavif-dev && \
+    docker-php-ext-configure gd $GD_PARAMS && \
+    docker-php-ext-install -j$(nproc) $PHP_MOD_INSTALL && \
+    apt-get clean autoclean && \
+    apt-get autoremove --yes && \
+    rm -rf /var/lib/{apt,dpkg,cache,log}/
+
+RUN addgroup resmush && \
+    adduser --no-create-home --ingroup resmush --shell /bin/bash --disabled-login resmush
+
+USER resmush
