@@ -23,19 +23,27 @@ By the way, you can increase the security level of your project by using your in
 
 ### Wordpress
 
-Update devined variable `RESMUSHIT_ENDPOINT` in the file `resmushit.settings.php`
+Update the defined variable `RESMUSHIT_ENDPOINT` in the file `resmushit.settings.php`
 
-```php
+```diff
 - define('RESMUSHIT_ENDPOINT', 'http://api.resmush.it/');
 + define('RESMUSHIT_ENDPOINT', 'https://YOUR_DOMAIN/');
 ```
 
 ### Laravel
 
-Update the constant `ENDPOINT` in the file `src/ReSmushIt.php` https://github.com/golchha21/ReSmushIt/blob/master/src/ReSmushIt.php#L12
+Update the constant `ENDPOINT` in the file `src/ReSmushIt.php`
 
-```php
--    private const ENDPOINT = 'http://api.resmush.it/';
-+    private const ENDPOINT = 'https://YOUR_DOMAIN/';
+```diff
+- private const ENDPOINT = 'http://api.resmush.it/';
++ private const ENDPOINT = 'https://YOUR_DOMAIN/';
 ```
 
+### Drupal
+
+In the `src/Plugin/ImageAPIOptimizeProcessor/ReSmushit.php` file, update the hardcoded URL according to the following code
+
+```diff
+- $response = $this->httpClient->post('http://api.resmush.it/ws.php', ['multipart' => $fields]);
++ $response = $this->httpClient->post('https://YOUR_DOMAIN/ws.php', ['multipart' => $fields]);
+```
