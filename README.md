@@ -12,7 +12,7 @@ I'd also like to mention that there is full backwards compatibility with the res
 This version of reSmush.it is called "Unleashed" because
 
 - here is a full source code, so you can run this API yourself on your server and get full control over it
-- There are increased limits of uploaded image (from 5MB to 25MB, or you can increase it here `config/webservice.ini.php:29` with the `RESMUSH_MAX_FILESIZE` parameter).
+- There are increased limits of uploaded image (from 5MB to 25MB, or you can increase it here `config/webservice.ini.php:29` with the `ENV_MAX_FILESIZE` parameter).
 - removed analytics :)
 
 ## How I should update my code to make it work with my instance?

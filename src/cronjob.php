@@ -6,8 +6,11 @@ require_once __DIR__ . '/config/settings_remote.ini.php';
 require_once __DIR__ . '/config/webservice.ini.php';
 require_once __DIR__ . '/bin/functions.php';
 
-if(!ISCLI)
-    die();
+if(!isCLI()) {
+    die('cli mode only');
+}
+
+cli_output('Start: ' . time());
 
 cli_output('Finding files older than ' . EXPIRED_LIMIT . ' sec...');
 $result = array();
@@ -33,4 +36,4 @@ if(sizeof($result) > 0){
     cli_output('Files deleted');
 }
 
-cli_output('Generating statistics...');
+cli_output('Finish: ' . time() . PHP_EOL);

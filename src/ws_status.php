@@ -12,16 +12,16 @@ $_service = new stdClass;
 
 $OUTPUT_FORMAT_override = OUTPUT_FORMAT;
 $_app->version = APPVER;
-$_app->identifier = REMOTE_SERVER_ID;
+$_app->identifier = REMOTE_SERVER_DOMAIN;
 
-$sections = ['_app', '_server', '_service', 'sensors'];
+$sections = ['_app', '_server', '_service'];
 if(isset($_GET['section']) && is_array($_GET['section'])) {
     $sections=$_GET['section'];
 }
 
 //Check disk space
-$df = disk_free_space("/srv");
-$dt = disk_total_space("/srv");
+$df = disk_free_space("/var");
+$dt = disk_total_space("/var");
 $du = $dt - $df;
 $dp = sprintf('%.2f',($du / $dt) * 100);
 if($dp > DISK_USAGE_THRESHOLD){
@@ -45,17 +45,18 @@ if($ramfs_dp > DISK_USAGE_THRESHOLD){
 }
 
 $_server->hostname = gethostname();
-$_server->sensors = array();
-$_server->diskuse = $dp;
-$_server->ramfsuse = $ramfs_dp;
+$_server->disk_free = fileSizeRender($df);
+$_server->disk_total = fileSizeRender($dt);
+$_server->disk_use = $dp;
+$_server->ramfs_free = fileSizeRender($ramfs_df);
+$_server->ramfs_total = fileSizeRender($ramfs_dt);
+$_server->ramfs_use = $ramfs_dp;
 $_server->phpversion = phpversion();
-
-
 
 /*Curl Test*/
 if(in_array('_service', $sections)){
     $ch = curl_init();
-    $localWebservice = REMOTE_SERVER_FULL_URL . 'ws.php?img=https://resmush.it/assets/images/compare_1_original.jpg&&qlty=30&key=' . REMOTE_KEY_FULL_RESPONSE;
+    $localWebservice = REMOTE_SERVER_PROTOCOL . '://' . REMOTE_SERVER_DOMAIN . '/ws.php?img=https://resmush.it/assets/images/compare_1_original.jpg&qlty=30&key=' . REMOTE_KEY_FULL_RESPONSE;
     curl_setopt($ch, CURLOPT_URL, $localWebservice);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);
@@ -85,15 +86,6 @@ if(in_array('_app', $sections)){
 } 
 if(in_array('_server', $sections)){
     $_output->_server = $_server;
-}
-
-if(in_array('sensors', $sections)){
-    $sensors = shell_exec('sensors');
-    preg_match_all("/([A-Za-z0-9 ]+):\s+\+([0-9]+\.[0-9]+)(.*)/siU",$sensors,$m);
-
-    foreach($m[1] as $k=>$v){
-        $_output->sensors[$v]  = $m[2][$k];
-    }
 }
 
 if($OUTPUT_FORMAT_override == 'json'){

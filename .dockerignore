@@ -1,7 +1,5 @@
-sast-vuln-checker.php
 .git
 .dockerignore
-.gitlab-ci.yml
 docker-compose.yml
 Dockerfile*
 .gitignore

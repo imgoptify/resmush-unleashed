@@ -1,11 +1,7 @@
 <?php
 
 /*
-* Create a statistic entry based on ws response
-*/
-
-/*
-* Return the loadavg mean between 1m, 5m and 15m
+* Replace file extension
 */
 
 function replace_extension($filename, $new_extension) {
@@ -46,16 +42,11 @@ function rrmdir($dir) {
 function fileSizeRender($filesize = 0){
   $range = 0;
   $units = array('B', 'KB', 'MB', 'GB', 'TB');
-  while($filesize > 1024):
+  while($filesize >= 1024 && $range < 4) {
     $range++;
-    $filesize = $filesize / 1024;
-  endwhile;
-  if($filesize < 10):
-    $filesize = round($filesize, 1);
-  else: 
-    $filesize = round($filesize, 0);
-  endif;
-  
+    $filesize /= 1024;
+  }
+  $filesize = ($filesize < 10) ? round($filesize, 1) : round($filesize);
   return $filesize . '' . $units[$range];
 }
 
@@ -100,4 +91,27 @@ function generate_valid_xml_from_array($array, $node_block='output', $node_name=
     $xml .= '</' . $node_block . '>' . "\n";
 
     return $xml;
+}
+
+/*
+* Get ENV from Docker env/file
+*/
+function getenv_docker($env, $default) {
+    if ($fileEnv = getenv($env . '_FILE')) {
+        return rtrim(file_get_contents($fileEnv), "\r\n");
+    }
+    else if (($val = getenv($env)) !== false) {
+        return $val;
+    }
+    else {
+        return $default;
+    }
+}
+
+/*
+* Check CLI mode
+*/
+function isCLI()
+{
+    return PHP_SAPI === 'cli' || defined('STDIN');
 }

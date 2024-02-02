@@ -82,8 +82,8 @@ if(!isset($img_src->method)){
                 $img_src->_src_filename = '_src_' . $img_src->filename;
                 $img_src->_src_fullpath = OUTPUT_DIR . TOKEN . '/' . $img_src->_src_filename;
                 $img_src->_dest_fullpath = OUTPUT_DIR . TOKEN . '/' . $img_src->filename;
-                $img_src->_src_url = REMOTE_SERVER . OUTPUT_DIR . TOKEN . '/' . rawurlencode($img_src->_src_filename);
-                $img_src->_dest_url = REMOTE_SERVER . OUTPUT_DIR . TOKEN . '/' . rawurlencode($img_src->filename);
+                $img_src->_src_url = REMOTE_SERVER_PROTOCOL . '://' . REMOTE_SERVER_DOMAIN . '/' . OUTPUT_DIR . TOKEN . '/' . rawurlencode($img_src->_src_filename);
+                $img_src->_dest_url = REMOTE_SERVER_PROTOCOL . '://' . REMOTE_SERVER_DOMAIN . '/' . OUTPUT_DIR . TOKEN . '/' . rawurlencode($img_src->filename);
                 @mkdir( OUTPUT_DIR . TOKEN . '/', 0777, true );
                 if(strlen($_FILES['files']['name']) > 255) {
                     $_output->error = 405;
@@ -124,7 +124,7 @@ if(!isset($img_src->method)){
             $img_src->_src_filename = '_src_' . $img_src->filename;
             $img_src->_src_fullpath = OUTPUT_DIR . TOKEN . '/' . $img_src->_src_filename;
             $img_src->_dest_fullpath = OUTPUT_DIR . TOKEN . '/' . $img_src->filename;
-            $img_src->_dest_url = REMOTE_SERVER . OUTPUT_DIR . TOKEN . '/' . rawurlencode($img_src->filename);
+            $img_src->_dest_url = REMOTE_SERVER_PROTOCOL . '://' . REMOTE_SERVER_DOMAIN . '/' . OUTPUT_DIR . TOKEN . '/' . rawurlencode($img_src->filename);
             $_output->filename = $img_src->filename;
             $_output->token = TOKEN;
             @mkdir( OUTPUT_DIR . TOKEN . '/', 0777, true );
@@ -163,7 +163,7 @@ if(!isset($img_src->method)){
                     $img_src->filename = replace_extension($img_src->filename, $FORCE_OUTPUT_FORMAT);
                     $_output->filename = $img_src->filename;
                     $img_src->_dest_fullpath = OUTPUT_DIR . TOKEN . '/' . $img_src->filename;
-                    $img_src->_dest_url = REMOTE_SERVER . OUTPUT_DIR . TOKEN . '/' . rawurlencode($img_src->filename);
+                    $img_src->_dest_url = REMOTE_SERVER_PROTOCOL . '://' . REMOTE_SERVER_DOMAIN . '/' . OUTPUT_DIR . TOKEN . '/' . rawurlencode($img_src->filename);
                     switch($FORCE_OUTPUT_FORMAT) {
                         case 'webp':
                             shell_exec(WEBP_PATH . (int)($JPEGOPTIM_LEVEL_override*WEBPMINORFACTOR_LEVEL) . " '$img_src->_src_fullpath' -o '$img_src->_dest_fullpath'");
@@ -255,7 +255,7 @@ if(!isset($img_src->method)){
 }
 
 $_output->generator = APPNAME . ' rev.' . APPVER;
-$_output->remote_server = REMOTE_SERVER_ID;
+$_output->remote_server = REMOTE_SERVER_DOMAIN;
 
 if(!isset($_GET['key']) || $_GET['key'] != REMOTE_KEY_FULL_RESPONSE) {
     if(isset($_output->host) || $_output->host === NULL) {
