@@ -1,4 +1,4 @@
 ARG REGISTRY
-FROM xxx:base
+FROM unleashed-resmush:base
 
 COPY --chown=resmush:resmush . .

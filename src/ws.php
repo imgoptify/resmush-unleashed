@@ -11,7 +11,6 @@ $img_src = new stdClass;
 $_output = new stdClass;
 $_output->host = 'N/A';
 $_output->client_type =  '';
-$clientInformations = FALSE;
 
 $OUTPUT_FORMAT_override = OUTPUT_FORMAT;
 

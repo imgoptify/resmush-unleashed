@@ -9,6 +9,7 @@ function replace_extension($filename, $new_extension) {
     return $info['filename'] . '.' . $new_extension;
 }
 
+
 /*
 * Return a microtime (to measure execution time)
 */
@@ -17,6 +18,7 @@ function getmicrotime()
     list($usec, $sec) = explode(" ",microtime());
     return ((float)$usec + (float)$sec);
 }
+
 
 /*
 * Delete recursively a folder
@@ -33,7 +35,6 @@ function rrmdir($dir) {
      rmdir($dir); 
    } 
 } 
-
 
 
 /*
@@ -107,6 +108,7 @@ function getenv_docker($env, $default) {
         return $default;
     }
 }
+
 
 /*
 * Check CLI mode
