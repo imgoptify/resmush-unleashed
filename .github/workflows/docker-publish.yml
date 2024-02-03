@@ -12,12 +12,16 @@ on:
           - info
           - warning
           - debug
+      releaseLabel:
+        description: 'Release label'
+        required: false
+        type: string
+        default: latest
 
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
   SHA: ${{ github.event.pull_request.head.sha || github.event.after }}
-  COMPARE_TAG: latest
 
 jobs:
   build:
@@ -67,7 +71,7 @@ jobs:
           file: Dockerfile.base
           push: true
           tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          labels: ${{ inputs.releaseLabel }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
       
