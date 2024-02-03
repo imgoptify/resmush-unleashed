@@ -69,6 +69,7 @@ jobs:
         with:
           context: .
           file: Dockerfile.base
+          push: true
           tags: ${{ inputs.releaseTag }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
