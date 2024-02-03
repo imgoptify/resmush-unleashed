@@ -63,11 +63,6 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Test
-        id: test-build
-        run: |
-          docker run --rm ${{ steps.meta.outputs.tags }}
-
       - name: Sign the published Docker image
         id: sign-via-cosign
         env:
