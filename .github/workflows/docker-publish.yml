@@ -16,7 +16,7 @@ on:
         description: 'Release tag'
         type: string
         required: true
-        default: latest
+        default: 'latest'
 
 env:
   REGISTRY: ghcr.io
@@ -65,11 +65,10 @@ jobs:
       
       - name: Build and push Docker image
         id: build-and-push
-        uses: docker/build-push-action@v4.0.0
+        uses: docker/build-push-action@v5
         with:
           context: .
           file: Dockerfile.base
-          push: true
           tags: ${{ inputs.releaseTag }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
