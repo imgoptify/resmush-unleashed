@@ -5,15 +5,21 @@
 
 This repository and the code in it allows you to set up your resmush instance on your infrastructure using a modern approach. It will be entirely your infrastructure, no vendor lock-in to external third party systems, dependent on payment by the owner or wanting to block access from some country for example, although silly, right? :)
 
-I'd also like to mention that there is full backwards compatibility with the resmush API, so all you need to do is replace the endpoint from `https://api.resmush.it/` in the integration module you use with your domain.
+I'd also like to mention that there is full backwards compatibility with the resmush API, so all you need to do is replace the endpoint from `api.resmush.it` to your own domain in the integration code you use.
 
 ## Unleashed version? What is it?
 
 This version of reSmush.it is called "Unleashed" because
 
 - here is a full source code, so you can run this API yourself on your server and get full control over it
-- There are increased limits of uploaded image (from 5MB to 25MB, or you can increase it here `config/webservice.ini.php:29` with the `ENV_MAX_FILESIZE` parameter).
+- There are increased limits of uploaded image (from 5MB to 25MB, or you can increase it here `config/webservice.ini.php:23` with the `MAX_FILESIZE` parameter or change param `ENV_MAX_FILESIZE` in `docker-compose.yml` file).
 - removed analytics :)
+
+## Getting Started
+
+- Clone repo to your server like `git clone https://github.com/imgoptify/resmush-unleashed.git`
+- Make necessary changes in `docker-compose.yml` file
+- Run `docker compose up -d`
 
 ## How I should update my code to make it work with my instance?
 

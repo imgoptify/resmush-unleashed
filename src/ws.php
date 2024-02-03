@@ -72,12 +72,14 @@ if(!isset($img_src->method)){
             $_output->error_long = 'Uploaded file must be below 5MB';
         } else {
             $img_src->filename = basename($_FILES['files']['name']);
-        $_pathinfo = pathinfo($_FILES['files']['name']);
+            $_pathinfo = pathinfo($_FILES['files']['name']);
+
             if(!isset($_pathinfo['extension']) OR !in_array(strtolower($_pathinfo['extension']), $_AUTHORIZED_EXTENSIONS)){
                 $_output->error = 403;
                 $_output->error_long = 'Unauthorized extension. Allowed are : JPG, PNG, GIF, BMP, TIFF, WEBP';
-        }
-        if(!isset($_output->error)){
+            }
+
+            if(!isset($_output->error)){
                 $img_src->_src_filename = '_src_' . $img_src->filename;
                 $img_src->_src_fullpath = OUTPUT_DIR . TOKEN . '/' . $img_src->_src_filename;
                 $img_src->_dest_fullpath = OUTPUT_DIR . TOKEN . '/' . $img_src->filename;
@@ -98,7 +100,7 @@ if(!isset($img_src->method)){
                         $_output->error_long = 'Interal Error: Cannot create a local copy';
                     }
                 }
-        }
+            }
         }
 
         if(!isset($_output->error)){
