@@ -12,11 +12,11 @@ on:
           - info
           - warning
           - debug
-      releaseLabel:
-        description: 'Release label'
+      releaseTag:
+        description: 'Release tag'
         required: false
         type: string
-        default: latest
+        default: ${{ steps.meta.outputs.tags }}
 
 env:
   REGISTRY: ghcr.io
@@ -70,8 +70,8 @@ jobs:
           context: .
           file: Dockerfile.base
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ inputs.releaseLabel }}
+          tags: ${{ inputs.releaseTag }}
+          labels: ${{steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
       
