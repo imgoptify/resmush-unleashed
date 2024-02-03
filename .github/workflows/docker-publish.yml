@@ -70,7 +70,7 @@ jobs:
           context: .
           file: Dockerfile.base
           push: true
-          tags: ${{ inputs.releaseTag }}
+          tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
