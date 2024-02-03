@@ -15,6 +15,8 @@ on:
       releaseTag:
         description: 'Release tag'
         type: string
+        required: true
+        default: latest
 
 env:
   REGISTRY: ghcr.io
@@ -68,7 +70,7 @@ jobs:
           context: .
           file: Dockerfile.base
           push: true
-          tags: ${{ inputs.releaseTag:-steps.meta.outputs.tags }}
+          tags: ${{ inputs.releaseTag }}
           labels: ${{steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
