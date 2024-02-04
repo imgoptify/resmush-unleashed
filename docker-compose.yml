@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
       args:
-        REGISTRY: ${REGISTRY:-ghcr.io/imgoptify/resmush-unleashed:69b413a}
+        REGISTRY: ${REGISTRY:-ghcr.io/imgoptify/resmush-unleashed}
     volumes:
       - ./src/:/var/www/html
     environment:

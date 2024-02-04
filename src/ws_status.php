@@ -94,4 +94,3 @@ if($OUTPUT_FORMAT_override == 'json'){
     header('Content-type: application/json');
     echo json_encode(get_object_vars($_output));
 }
-

@@ -10,5 +10,3 @@ $_output->generator = APPNAME . ' rev.' . APPVER;
 http_response_code(404);
 header('Content-type: application/json');
 echo json_encode(get_object_vars($_output));
-
-

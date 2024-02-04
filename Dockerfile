@@ -1,4 +1,4 @@
 ARG REGISTRY
-FROM  ${REGISTRY}:base
+FROM  ${REGISTRY}:69b413a
 
 COPY --chown=resmush:resmush . .
