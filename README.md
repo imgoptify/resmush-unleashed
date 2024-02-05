@@ -21,6 +21,10 @@ This version of reSmush.it is called "Unleashed" because
 - Make necessary changes in `docker-compose.yml` file
 - Run `docker compose up -d`
 
+### CRON
+
+Wanna remove processed images? Simply run CRON task from host like `*/15 * * * * docker exec -it <container> php /var/www/html/cronjob.php`
+
 ## How I should update my code to make it work with my instance?
 
 All you need to do is find the API endpoint URL (domain `api.resmush.it`) from resmush and replace it with yours. Below are the changes for the most popular plugins, which you can use as an example to make changes to your own module or implementation.
