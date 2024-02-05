@@ -57,3 +57,12 @@ In the `src/Plugin/ImageAPIOptimizeProcessor/ReSmushit.php` file, update the har
 - $response = $this->httpClient->post('http://api.resmush.it/ws.php', ['multipart' => $fields]);
 + $response = $this->httpClient->post('https://YOUR_DOMAIN/ws.php', ['multipart' => $fields]);
 ```
+
+### CLI / Bash
+
+In the file [resmushit-cli.sh](https://github.com/charlyie/resmushit-cli/blob/master/resmushit-cli.sh) update `API_URL` variable
+
+```diff
+- API_URL="http://api.resmush.it"
++ API_URL="https://YOUR_DOMAIN"
+```
