@@ -6,7 +6,7 @@ require_once __DIR__ . '/config/settings_remote.ini.php';
 require_once __DIR__ . '/config/webservice.ini.php';
 require_once __DIR__ . '/bin/functions.php';
 
-if(!isCLI()) {
+if(!ISCLI) {
     die('cli mode only');
 }
 

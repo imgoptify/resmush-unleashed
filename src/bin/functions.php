@@ -108,12 +108,3 @@ function getenv_docker($env, $default) {
         return $default;
     }
 }
-
-
-/*
-* Check CLI mode
-*/
-function isCLI()
-{
-    return PHP_SAPI === 'cli' || defined('STDIN');
-}

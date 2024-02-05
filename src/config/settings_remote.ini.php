@@ -3,6 +3,8 @@
 require_once __DIR__ . '/../bin/functions.php';
 
 
+define('ISCLI', PHP_SAPI === 'cli');
+
 define('OUTPUT_FORMAT', 'json');
 define('OUTPUT_DIR', 'output/');
 
